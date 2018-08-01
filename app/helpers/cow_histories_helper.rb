@@ -1,0 +1,2 @@
+module CowHistoriesHelper
+end

@@ -1,0 +1,26 @@
+ 
+<% if @users.each do |user| %>
+  <tr>
+		<td><%= user.id %></td>
+		<td><%= user.name %> <%= user.lastname %></td> 
+		<td><%= user.email %></td>
+		<td><%= user.role.rol_name %></td> 
+   <td><%= user.deleted_at ? 'Baja' : 'Activo'  %></td>  
+    <td> 
+        <%=link_to [:admin, user], :class => "btn btn-small btn-primary", remote: true do %>
+          <i class="btn-icon-only icon-search"> </i>
+        <%end%>
+        <% if user.deleted_at.nil? %>
+         <%= link_to edit_admin_user_path(user), :class => "btn btn-small btn-warning", remote:true do %>
+          <i class="btn-icon-only icon-pencil"> </i>
+        <%end%>
+        
+         <%=link_to admin_user_delete_path(user), :class => "btn btn-small btn-danger", remote:true  do %>
+           <i class="btn-icon-only icon-trash"> </i>
+        <%end%>
+        <%end%>
+         </td>
+  </tr>
+<% end.empty? %>
+	<h3>No hay resultados</h3>
+<% end %>

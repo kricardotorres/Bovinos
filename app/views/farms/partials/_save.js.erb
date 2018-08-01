@@ -1,0 +1,11 @@
+$("ul.errors").html("")
+<% if @veterinary.errors.any? %>
+  <% @veterinary.errors.full_messages.each do |message| %>
+    $("ul.errors").append($("<li />").html("<%= message.html_safe %>"))
+  <% end %> 
+  $("#modal-veterinaries").animate({ scrollTop: 0 }, 'slow')
+<% else %>
+  $(".veterinaries-table-index").html("<%= j(render 'veterinaries/partials/index') %>")
+  $("ul.msg").append($("<li />").html("<%= @msgResult %>"))
+  $("#modal-veterinaries").modal("hide")
+<% end %>

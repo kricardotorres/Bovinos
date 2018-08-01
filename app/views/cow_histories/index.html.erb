@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Cow Histories</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>X</th>
+      <th>Y</th>
+      <th>Z</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @cow_histories.each do |cow_history| %>
+      <tr>
+        <td><%= cow_history.x %></td>
+        <td><%= cow_history.y %></td>
+        <td><%= cow_history.z %></td>
+        <td><%= link_to 'Show', cow_history %></td>
+        <td><%= link_to 'Edit', edit_cow_history_path(cow_history) %></td>
+        <td><%= link_to 'Destroy', cow_history, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Cow History', new_cow_history_path %>

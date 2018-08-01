@@ -1,0 +1,62 @@
+<div class="modal-dialog">
+	<div class="modal-content">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+			<h4 class="modal-title" id="myModalLabel">Datos de la empresa</h4>
+		</div>
+		<div class="modal-body">
+			<div class="form-group">
+			  
+				<div class="col-md-12 m-b-20">
+					<div class="control-label"><strong><%= t("veterinary.name")%>:</strong>
+						<p><%= @veterinary.user.name %> <%= @veterinary.user.lastname %></p>
+					</div>
+					
+				</div>
+				<!-- /.row -->
+				<hr>
+				<!-- .row -->
+				<div class="col-md-12 m-b-20">
+					<div class="control-label"><strong><%= t('user.email') %>:</strong>
+						<p><%= @veterinary.user.email %></p> 
+
+					</div>
+					
+				</div>
+				<!-- /.row -->
+               <hr>
+				<div class="col-md-12 m-b-20">
+					<div class="control-label"><strong><%= t('veterinary.clinic') %>:</strong>
+						<p><%= @veterinary.clinic %> </p> 
+
+					</div>
+					
+				</div>
+				<hr>
+				<div class="col-md-12 m-b-20">
+					<div class="control-label"><strong><%= t('veterinary.address') %>:</strong>
+						<p><%= @veterinary.address %> </p> 
+
+					</div>
+					
+				</div>
+				<hr>
+				
+				<hr>
+				<div class="col-md-12 m-b-20">
+					<div class="control-label"><strong><%= t('veterinary.phone') %>:</strong>
+						<p><%= @veterinary.phone %> </p> 
+
+					</div>
+					
+				</div>
+				<hr>		
+ 
+			</div>
+		</div>
+		<div class="modal-footer"> 
+			<button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Cerrar</button>
+		</div>
+	</div>
+	<!-- /.modal-content -->
+</div>

@@ -1,0 +1,44 @@
+<div class="modal-dialog">
+	<div class="modal-content">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+			<h4 class="modal-title" id="myModalLabel">Búsqueda</h4>
+			<h5>Ingrese los parámetros de su búsqueda</h5>
+		</div>
+		<%= form_tag admin_users_path ,method: :get ,remote:true, class: "form-horizontal form-material" do %>
+			<div class="modal-body">
+				<div class="form-group">
+					<div class="col-md-12 m-b-20"> 
+						<label class="col-md-12"><%= t("users.email")%></label>
+						<div class="col-md-12">
+							<%= search_field_tag  "q[email_cont]",nil,class: "form-control", placeholder: t('users.email')%>
+						</div>
+					</div>
+					<div class="col-md-12 m-b-20"> 
+						<label class="col-md-12"><%= t("users.name")%></label>
+						<div class="col-md-12">
+							<%= search_field_tag "q[name_cont]",nil,class: "form-control" , placeholder: t('users.name') %>
+						</div>
+					</div>
+					<div class="col-md-12 m-b-20"> 
+						<label class="col-md-12"><%= t("users.lastname")%></label>
+						<div class="col-md-12">
+							<%= search_field_tag "q[last_name_cont]",nil,class: "form-control" , placeholder: t('users.lastname') %>
+						</div>  
+					</div>
+					<div class="col-md-12 m-b-20">
+						<label class="col-md-12"><%= t("users.role")%></label>
+						<div class="col-md-6">
+							<%= select_tag "q[role_id_eq]", options_from_collection_for_select(Role.all, "id", "rol_name"), prompt: t('choose_from_select'), class:"form-control"%>
+						</div>
+					</div>
+					 
+				</div>
+			</div>
+			<div class="modal-footer">
+				<%= submit_tag t('search'),class: 'btn btn-info waves-effect' %> 
+				<button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Cancelar</button>
+			</div>
+		<% end %>
+	</div>
+</div>

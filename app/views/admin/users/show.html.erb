@@ -1,0 +1,57 @@
+<p id="notice"><%= notice %></p>
+
+
+
+<div class="row">
+  <div class="col-lg-6">
+
+
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= @user.email %></h3>
+      </div>
+      <div class="panel-body">
+
+        <p>
+          <strong><%= t('users.email')%>:</strong>
+          <%= @user.email %>
+        </p>
+
+        <p>
+          <strong><%= t('users.password')%>:</strong>
+          <%= @user.password %>
+        </p>
+
+        <p>
+          <strong><%= t('users.password_confirmation')%>:</strong>
+          <%= @user.password_confirmation %>
+        </p>
+
+        <p>
+          <strong><%= t('users.name')%>:</strong>
+          <%= @user.name %>
+        </p>
+
+        <p>
+          <strong><%= t('users.last_name')%>:</strong>
+          <%= @user.last_name %>
+        </p>
+
+        <p>
+          <strong><%= t('users.status')%>:</strong>
+          <%= @user.status_id %>
+        </p>
+
+        <p>
+          <strong><%= t('users.role')%>:</strong>
+          <%= @user.role_id %>
+        </p>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<%= link_to t('general.buttons.edit'), edit_admin_user_path(@user), class: 'btn btn-default' %>
+<%= link_to t('general.buttons.back'), admin_users_path, class: 'btn btn-default' %>

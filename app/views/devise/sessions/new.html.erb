@@ -1,0 +1,56 @@
+ 
+
+
+
+<div class="account-container">
+  
+  <div class="content clearfix">
+    
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    
+      <h1>Member Login</h1>   
+      
+      <div class="login-fields">
+        
+        <p>Please provide your details</p>
+        
+        <div class="field">
+            <%= f.label :email %><br />
+            <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Username", class: "login username-field" %>
+        </div> <!-- /field -->
+        
+        <div class="field">
+           <%= f.label :password %><br />
+           <%= f.password_field :password, autocomplete: "off", placeholder: "Password", class: "login password-field " %>
+          
+        </div> <!-- /password -->
+        
+      </div> <!-- /login-fields -->
+      
+      <div class="login-actions">
+        
+        <span class="login-checkbox">
+          <% if devise_mapping.rememberable? -%>
+
+          <%= f.check_box :remember_me, class: "field login-checkbox"  %>
+          <%= f.label :remember_me %>
+
+          <% end -%>
+        </span>
+        <%= f.submit "Log in", class: "button btn btn-success btn-large" %>   
+        
+      </div> <!-- .actions -->
+      
+      
+      
+   <% end %>
+    
+  </div> <!-- /content -->
+  
+</div> <!-- /account-container -->
+
+
+
+<div class="login-extra">
+ <%= render "devise/shared/links" %>
+</div> <!-- /login-extra -->

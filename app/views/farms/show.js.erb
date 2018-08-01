@@ -1,0 +1,3 @@
+$("#modal-veterinaries").html("<%= escape_javascript(render 'veterinaries/partials/show') %>")
+$("#modal-veterinaries").modal({backdrop: 'static', keyboard: false})
+$("#modal-veterinaries").modal("show")

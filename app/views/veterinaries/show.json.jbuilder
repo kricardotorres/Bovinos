@@ -1,0 +1,1 @@
+json.extract! @veterinary, :id, :name, :description

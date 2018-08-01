@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  key_id: MyString
+  name: MyString
+  birthday: 2018-04-11 17:32:21
+  deaddate: 2018-04-11 17:32:21
+  deleted_at: 2018-04-11 17:32:21
+
+two:
+  key_id: MyString
+  name: MyString
+  birthday: 2018-04-11 17:32:21
+  deaddate: 2018-04-11 17:32:21
+  deleted_at: 2018-04-11 17:32:21

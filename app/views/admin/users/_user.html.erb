@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+<div class="form-group">
+
+  <div class="col-md-12 m-b-20">
+
+
+        <div class="panel panel-default">
+
+          <p>
+            <strong><%= t('users.email')%>:</strong>
+            <%= @user.email %>
+          </p> 
+          <p>
+            <strong><%= t('users.name')%>:</strong>
+            <%= @user.name %>
+          </p>
+          <p>
+            <strong><%= t('users.lastname')%>:</strong>
+            <%= @user.lastname %>
+          </p> 
+
+
+          <p>
+            <strong><%= t('users.role')%>:</strong>
+            <%= @user.role.rol_name %>
+          </p>
+        </div> 
+  </div>
+</div>

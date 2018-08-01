@@ -1,0 +1,27 @@
+<%= form_with(model: arduino_device, local: true) do |form| %>
+  <% if arduino_device.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(arduino_device.errors.count, "error") %> prohibited this arduino_device from being saved:</h2>
+
+      <ul>
+      <% arduino_device.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :chipid %>
+    <%= form.text_field :chipid, id: :arduino_device_chipid %>
+  </div>
+
+  <div class="field">
+    <%= form.label :model %>
+    <%= form.text_field :model, id: :arduino_device_model %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

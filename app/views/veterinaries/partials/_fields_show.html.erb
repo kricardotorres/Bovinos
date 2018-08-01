@@ -1,0 +1,31 @@
+<div class="col-lg-6">
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title"><%= t('veterinaries.veterinary')%></h3>
+  </div>
+  <div class="panel-body">
+	<p id="notice">
+	<%= notice %>
+</p>
+
+<p>
+  <strong>Company name:</strong>
+  <%= @veterinary.name %>
+</p>
+
+
+<p>
+  <strong>Description:</strong>
+  <%= @veterinary.description %>
+</p>
+
+</p>
+
+ 
+<%= link_to 'Edit', edit_veterinary_path(@veterinary) %> 
+ 
+  	</div>
+</div>
+
+</div>

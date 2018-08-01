@@ -1,0 +1,113 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Chipid:</strong>
+  <%= @arduino_device.chipid %>
+</p>
+
+<p>
+  <strong>Model:</strong>
+  <%= @arduino_device.model %>
+</p>
+
+<p>
+  <strong>Usuario:</strong>
+  <%= @arduino_device.user.name %>
+</p>
+
+<p>
+  <strong>ID de Bovino:</strong>
+  <%= @arduino_device.cow.id %>
+</p>
+ 
+<p>
+
+  <strong>Historial de Dispositivo:</strong>  
+  <div class="col-md-12">
+  	<div class="col-md-4">
+      <div id="cow_state"> </div>
+  		  <h1>Eje X</h1>
+  <%= line_chart arduino_device_get_last_moves_x_path(@arduino_device), id: "x",   height: "200px" %>
+  	</div>
+
+  	<div class="col-md-4">
+  		
+  <h1>Eje Y</h1>
+  <%= line_chart arduino_device_get_last_moves_y_path(@arduino_device), id: "y",  height: "200px" %>
+  	</div>
+  	<div class="col-md-4">
+  		
+  <h1>Eje Z</h1>
+  <%= line_chart arduino_device_get_last_moves_z_path(@arduino_device), id: "z",  height: "200px" %>
+  	</div>
+  </div>
+<h2>Detalles de movimiento</h2>
+<div id="msn">Cargando...</div>
+
+</p>
+<%= link_to 'Edit', edit_arduino_device_path(@arduino_device) %> |
+<%= link_to 'Back', arduino_devices_path %>
+<script type="text/javascript">
+	$(document).on('turbolinks:load', function(event) {
+		
+		setInterval(function(){ 
+			var chart = Chartkick.charts["x"]
+			$.ajax({
+				url: "/arduino_devices/<%=@arduino_device.id%>/get_last_moves_x",
+				type: 'GET',
+        dataType: 'json', // added data type
+        success: function(res) {
+        	chart.updateData(res);
+        }
+    });
+			
+		}, 3000);
+	});
+</script>
+<script type="text/javascript">
+	$(document).on('turbolinks:load', function(event) {
+		
+		setInterval(function(){ 
+			var chart = Chartkick.charts["y"]
+			$.ajax({
+				url: "/arduino_devices/<%=@arduino_device.id%>/get_last_moves_y",
+				type: 'GET',
+        dataType: 'json', // added data type
+        success: function(res) {
+        	chart.updateData(res);
+        }
+    });
+			
+		}, 5000);
+	});
+</script>
+<script type="text/javascript">
+	$(document).on('turbolinks:load', function(event) {
+		
+		setInterval(function(){ 
+			var chart = Chartkick.charts["z"]
+			$.ajax({
+				url: "/arduino_devices/<%=@arduino_device.id%>/get_last_moves_z",
+				type: 'GET',
+        dataType: 'json', // added data type
+        success: function(res) {
+        	chart.updateData(res);
+        }
+    });
+			
+		}, 5000);
+	});
+</script>
+
+<script>
+  
+    $(document).on('turbolinks:load', function(event) {
+    
+    setInterval(function(){ 
+       $.ajax({url: "/arduino_devices/<%=@arduino_device.id%>/get_last_moves", success: function(result){
+        $("#msn").html(result);
+      }});
+      
+    }, 5000);
+  });
+</script>

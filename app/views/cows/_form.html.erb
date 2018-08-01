@@ -1,0 +1,42 @@
+<%= form_with(model: cow, local: true) do |form| %>
+  <% if cow.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(cow.errors.count, "error") %> prohibited this cow from being saved:</h2>
+
+      <ul>
+      <% cow.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :key_id %>
+    <%= form.text_field :key_id, id: :cow_key_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name, id: :cow_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :birthday %>
+    <%= form.datetime_select :birthday, id: :cow_birthday %>
+  </div>
+
+  <div class="field">
+    <%= form.label :deaddate %>
+    <%= form.datetime_select :deaddate, id: :cow_deaddate %>
+  </div>
+
+  <div class="field">
+    <%= form.label :deleted_at %>
+    <%= form.datetime_select :deleted_at, id: :cow_deleted_at %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

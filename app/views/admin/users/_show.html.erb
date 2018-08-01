@@ -1,0 +1,13 @@
+<div class="modal-dialog">
+	<div class="modal-content">
+		<div class="modal-header">
+			<h3 class="modal-title"><%="#{@user.full_name}"%></h3>
+		</div>
+		<div class="modal-body"> 
+			<%= render "user" %>
+		</div>
+		<div class="modal-footer">
+			<%= link_to t('user.close'), "#", class: "btn", data: { dismiss: "modal" } %>
+		</div>
+	</div>
+</div>

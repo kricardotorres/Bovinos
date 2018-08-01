@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>X:</strong>
+  <%= @cow_history.x %>
+</p>
+
+<p>
+  <strong>Y:</strong>
+  <%= @cow_history.y %>
+</p>
+
+<p>
+  <strong>Z:</strong>
+  <%= @cow_history.z %>
+</p>
+
+<%= link_to 'Edit', edit_cow_history_path(@cow_history) %> |
+<%= link_to 'Back', cow_histories_path %>

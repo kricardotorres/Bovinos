@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bovinos</title>
+    <%= csrf_meta_tags %> 
+    <meta charset="UTF-8">
+    <title>Seiton</title> 
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"> 
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= action_cable_meta_tag %>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/highcharts/6.0.7/adapters/standalone-framework.js"></script>
+ 	 <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+
+  <div class="navbar navbar-fixed-top">
+    
+    <div class="navbar-inner">
+        
+        <div class="container">
+            
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </a>
+            
+            <a class="brand" href="index.html">
+                Control de Bovinos
+            </a>        
+      <div class="nav-collapse">
+        <ul class="nav pull-right">
+           
+          <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
+                            class="icon-user"></i> <%= current_user.name+" "+current_user.lastname %> <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><a href="javascript:;">Profile</a></li>
+              
+
+
+              <li> 
+               <%if user_signed_in? %>  
+                    
+                    <%=link_to destroy_user_session_path,   method: :delete,  data: { turbolinks: false }   do %>
+                    Cerrar Sesión <i class="glyph-icon icon-linecons-lock"></i>
+                    <%end%>
+               
+                <%end%> </li>
+            </ul>
+          </li>
+        </ul>
+         
+      </div>
+      <!--/.nav-collapse --> 
+    </div>
+    <!-- /container --> 
+  </div>
+  <!-- /navbar-inner --> 
+</div>
+<!-- /navbar -->
+<div class="subnavbar">
+  <div class="subnavbar-inner">
+    <div class="container">
+      <ul class="mainnav">
+        <li class="<% if controller.controller_name == "welcome" %>active<%end%>">
+          <%=link_to root_path,  data: { turbolinks: false }   do %>
+          <i class="icon-dashboard"></i>
+          <span>Dashboard</span> 
+          <%end%> 
+
+        </li>
+        <li><a href="reports.html"><i class="icon-signal"></i><span>Reportes</span> </a> </li>
+        <li class="<% if controller.controller_name == "veterinaries" %>active<%end%>">
+          <%=link_to arduino_devices_path,  data: { turbolinks: false }   do %>
+          <i class="icon-hdd"></i>
+          <span>Mis arduinos</span> 
+          <%end%>  
+        </li>
+        <li class="<% if controller.controller_name == "veterinaries" %>active<%end%>">
+          <%=link_to veterinaries_path,  data: { turbolinks: false }   do %>
+          <i class="icon-user-md"></i>
+          <span>Veterinarios</span> 
+          <%end%>  
+        </li>
+        <li class="<% if controller.controller_name == "users" %>active<%end%>"> 
+         <%=link_to admin_users_path,  data: { turbolinks: false }   do %>
+            <i class="shortcut-icon icon-user"></i>
+            <span>Usuarios</span> 
+         <%end%> 
+        </li>
+        
+      </ul>
+    </div>
+    <!-- /container --> 
+  </div>
+  <!-- /subnavbar-inner --> 
+</div>
+<!-- /subnavbar -->
+<div class="main">
+  <div class="main-inner">
+    <div class="container">
+      <% if notice %>
+      <div class="alert alert-success alert-dismissable">
+        <i class="fa fa-check"></i>
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+        <b><%= notice %></b>
+      </div>
+      <% end %>
+      <% if alert %>
+      <div class="alert alert-danger alert-dismissable">
+        <i class="fa fa-ban"></i>
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+        <b><%= alert %></b>
+      </div>
+      <% end %>
+     <%= yield %>
+    
+      <!-- /row --> 
+    </div>
+    <!-- /container --> 
+  </div>
+  <!-- /main-inner --> 
+</div>
+<!-- /main -->
+<div class="extra">
+  <div class="extra-inner">
+    <div class="container">
+      <div class="row">
+                    <div class="span3">
+                        <h4>
+                            About Free Admin Template</h4>
+                        <ul>
+                            <li><a href="javascript:;">EGrappler.com</a></li>
+                            <li><a href="javascript:;">Web Development Resources</a></li>
+                            <li><a href="javascript:;">Responsive HTML5 Portfolio Templates</a></li>
+                            <li><a href="javascript:;">Free Resources and Scripts</a></li>
+                        </ul>
+                    </div>
+                    <!-- /span3 -->
+                    <div class="span3">
+                        <h4>
+                            Support</h4>
+                        <ul>
+                            <li><a href="javascript:;">Frequently Asked Questions</a></li>
+                            <li><a href="javascript:;">Ask a Question</a></li>
+                            <li><a href="javascript:;">Video Tutorial</a></li>
+                            <li><a href="javascript:;">Feedback</a></li>
+                        </ul>
+                    </div>
+                    <!-- /span3 -->
+                    <div class="span3">
+                        <h4>
+                            Something Legal</h4>
+                        <ul>
+                            <li><a href="javascript:;">Read License</a></li>
+                            <li><a href="javascript:;">Terms of Use</a></li>
+                            <li><a href="javascript:;">Privacy Policy</a></li>
+                        </ul>
+                    </div>
+                    <!-- /span3 -->
+                    <div class="span3">
+                        <h4>
+                            Open Source jQuery Plugins</h4>
+                        <ul>
+                            <li><a href="">Open Source jQuery Plugins</a></li>
+                            <li><a href="">HTML5 Responsive Tempaltes</a></li>
+                            <li><a href="">Free Contact Form Plugin</a></li>
+                            <li><a href="">Flat UI PSD</a></li>
+                        </ul>
+                    </div>
+                    <!-- /span3 -->
+                </div>
+      <!-- /row --> 
+    </div>
+    <!-- /container --> 
+  </div>
+  <!-- /extra-inner --> 
+</div>
+<!-- /extra -->
+<div class="footer">
+  <div class="footer-inner">
+    <div class="container">
+      <div class="row">
+        <div class="span12"> &copy; 2018 <a href="#">Control de Bovinos</a>. </div>
+        <!-- /span12 --> 
+      </div>
+      <!-- /row --> 
+    </div>
+    <!-- /container --> 
+  </div>
+  <!-- /footer-inner --> 
+</div>
+    
+        
+  </body>
+</html>
