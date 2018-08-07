@@ -44,6 +44,8 @@ GEM
       activemodel (= 5.1.6)
       activesupport (= 5.1.6)
       arel (~> 8.0)
+    activerecord-mysql2-adapter (0.0.3)
+      mysql2
     activesupport (5.1.6)
       concurrent-ruby (~> 1.0, >= 1.0.2)
       i18n (>= 0.7, < 2)
@@ -291,6 +293,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  activerecord-mysql2-adapter
   apipie-rails
   byebug
   capybara (~> 2.13)
@@ -330,4 +333,4 @@ DEPENDENCIES
   wkhtmltopdf-binary-edge
 
 BUNDLED WITH
-   1.16.1
+   1.16.3
