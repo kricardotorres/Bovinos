@@ -15,24 +15,8 @@ class ArduinoDevicesController < ApplicationController
   def get_last_moves_x  
 
 
-    @arduino_device = ArduinoDevice.find(params[:arduino_device_id]) 
-   
-    @arduino_device.cow_histories.last(15).each_with_index do |cow_historie, index|
-      if @last_hist  
-        diference = cow_historie.x.to_f -  @last_hist.x.to_f 
-        puts "La vaca se inclino hacia al frente, Fecha: "+cow_historie.created_at.to_s if diference < -50
-        puts "La vaca se inclino hacia a atras, Fecha:  "+cow_historie.created_at.to_s if diference > 50  
-         diference = cow_historie.y.to_f -  @last_hist.y.to_f 
-        puts "La vaca se inclino hacia la derecha, Fecha: "+cow_historie.created_at.to_s  if diference < -50
-        puts "La vaca se inclino hacia la izquierda, Fecha: "+cow_historie.created_at.to_s if diference > 50  
-        diference = cow_historie.z.to_f -  @last_hist.z.to_f 
-       
-        puts "La vaca se roto hacia la derecha, Fecha: "+cow_historie.created_at.to_s  if diference < -50
-        puts "La vaca se roto hacia la  izquierda, Fecha: "+cow_historie.created_at.to_s  if diference > 50  
-        puts "--------"
-      end  
-      @last_hist = cow_historie
-    end 
+    @arduino_device = ArduinoDevice.find(params[:arduino_device_id])  
+ 
 
     render json:  @arduino_device.cow_histories.pluck(:created_at,:x ).last(15) 
   end 
@@ -47,15 +31,15 @@ class ArduinoDevicesController < ApplicationController
     @arduino_device.cow_histories.last(15).each_with_index do |cow_historie, index|
       if @last_hist  
         diference = cow_historie.x.to_f -  @last_hist.x.to_f 
-        @total+= "<br> La vaca se inclino hacia al frente, Fecha: "+cow_historie.created_at.to_s if diference < -50
-        @total+= "<br> La vaca se inclino hacia a atras, Fecha:  "+cow_historie.created_at.to_s if diference > 50  
+        @total+= "<br> La vaca se inclino hacia al frente, Fecha: "+cow_historie.created_at.utc.to_s if diference < -50
+        @total+= "<br> La vaca se inclino hacia a atras, Fecha:  "+cow_historie.created_at.utc.to_s if diference > 50  
          diference = cow_historie.y.to_f -  @last_hist.y.to_f 
-        @total+= "<br> La vaca se inclino hacia la derecha, Fecha: "+cow_historie.created_at.to_s  if diference < -50
-        @total+= "<br> La vaca se inclino hacia la izquierda, Fecha: "+cow_historie.created_at.to_s if diference > 50  
+        @total+= "<br> La vaca se inclino hacia la derecha, Fecha: "+cow_historie.created_at.utc.to_s  if diference < -50
+        @total+= "<br> La vaca se inclino hacia la izquierda, Fecha: "+cow_historie.created_at.utc.to_s if diference > 50  
         diference = cow_historie.z.to_f -  @last_hist.z.to_f 
        
-        @total+= "<br> La vaca se roto hacia la derecha, Fecha: "+cow_historie.created_at.to_s  if diference < -50
-        @total+= "<br> La vaca se roto hacia la  izquierda, Fecha: "+cow_historie.created_at.to_s  if diference > 50  
+        @total+= "<br> La vaca se roto hacia la derecha, Fecha: "+cow_historie.created_at.utc.to_s  if diference < -50
+        @total+= "<br> La vaca se roto hacia la  izquierda, Fecha: "+cow_historie.created_at.utc.to_s  if diference > 50  
          
       end  
       @last_hist = cow_historie

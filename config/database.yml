@@ -48,7 +48,4 @@ test:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
 production:
-  <<: *default
-  database: Bovinos_production
-  username: Bovinos
-  password: <%= ENV['BOVINOS_DATABASE_PASSWORD'] %>
+    url: <%= ENV['DATABASE_URL'] %>

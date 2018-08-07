@@ -41,7 +41,7 @@ gem "mini_magick"
 # html to pdf
 gem 'ransack', github: 'activerecord-hackery/ransack'
 gem 'kaminari'
-
+gem 'config' 
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary'
 gem 'wkhtmltopdf-binary-edge' 
