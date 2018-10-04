@@ -18,7 +18,7 @@ class ArduinoDevicesController < ApplicationController
     @arduino_device = ArduinoDevice.find(params[:arduino_device_id])  
  
 
-    render json:  @arduino_device.cow_histories.pluck(:created_at,:x ).last(15) 
+    render json:  @arduino_device.cow_histories.pluck(:created_at,:x ).last(50) 
   end 
 
 
@@ -28,22 +28,47 @@ class ArduinoDevicesController < ApplicationController
 
     @arduino_device = ArduinoDevice.find(params[:arduino_device_id]) 
    
-    @arduino_device.cow_histories.last(15).each_with_index do |cow_historie, index|
+    @arduino_device.cow_histories.last(50).each_with_index do |cow_historie, index|
       if @last_hist  
-        diference = cow_historie.x.to_f -  @last_hist.x.to_f 
-        @total+= "<br> La vaca se inclino hacia al frente, Fecha: "+cow_historie.created_at.utc.to_s if diference < -50
-        @total+= "<br> La vaca se inclino hacia a atras, Fecha:  "+cow_historie.created_at.utc.to_s if diference > 50  
-         diference = cow_historie.y.to_f -  @last_hist.y.to_f 
-        @total+= "<br> La vaca se inclino hacia la derecha, Fecha: "+cow_historie.created_at.utc.to_s  if diference < -50
-        @total+= "<br> La vaca se inclino hacia la izquierda, Fecha: "+cow_historie.created_at.utc.to_s if diference > 50  
+        @is_moving =false
+        diference_movement = cow_historie.y.to_f -  @last_hist.y.to_f 
+        puts cow_historie.y.to_f
+        @is_moving =true if diference_movement>5||diference_movement<-5
+        puts diference_movement
+        puts  @is_moving
         diference = cow_historie.z.to_f -  @last_hist.z.to_f 
-       
-        @total+= "<br> La vaca se roto hacia la derecha, Fecha: "+cow_historie.created_at.utc.to_s  if diference < -50
-        @total+= "<br> La vaca se roto hacia la  izquierda, Fecha: "+cow_historie.created_at.utc.to_s  if diference > 50  
+        @direccion=""
+        @direccion= "  hacia la derecha  "   if diference < -100
+        @direccion=" hacia la  izquierda  "  if diference > 100
+       #
+       @total+= "<br>La vaca esta caminando"+@direccion+", Fecha:"+cow_historie.created_at.utc.to_s if @is_moving
+       #
+       @total+= "<br>La vaca esta parada/quieta, Fecha:"+cow_historie.created_at.utc.to_s if (70..90).include?(cow_historie.x.to_f)&&(-10..15).include?(cow_historie.y.to_f)&&(70..90).include?(@last_hist.x.to_f)&&(-10..15).include?(@last_hist.y.to_f)&&!@is_moving
+       #
+       @total+= "<br>La vaca esta sentada, Fecha:"+cow_historie.created_at.utc.to_s if (-20..19).include?(cow_historie.x.to_f)&&(-90..-63).include?(cow_historie.y.to_f)&&(-20..19).include?(@last_hist.x.to_f)&&(-90..-63).include?(@last_hist.y.to_f)
+         
          
       end  
       @last_hist = cow_historie
 
+    end 
+    puts @total
+    render :layout => false
+  end 
+
+   def get_cow_state
+
+    @total=''
+
+    @arduino_device = ArduinoDevice.find(params[:arduino_device_id]) 
+   
+    @arduino_device.cow_histories.last(50).each_with_index do |cow_historie, index|
+        
+        
+         cow_historie.x.to_f  
+       
+       
+     
     end 
     render :layout => false
   end 
@@ -53,13 +78,13 @@ class ArduinoDevicesController < ApplicationController
      @arduino_device = ArduinoDevice.find(params[:arduino_device_id])
       
      
-    render json:  @arduino_device.cow_histories.pluck(:created_at,:y ).last(15) 
+    render json:  @arduino_device.cow_histories.pluck(:created_at,:y ).last(50) 
   end  
   def get_last_moves_z  
 
      @arduino_device = ArduinoDevice.find(params[:arduino_device_id])
      
-    render json:  @arduino_device.cow_histories.pluck(:created_at,:z ).last(15) 
+    render json:  @arduino_device.cow_histories.pluck(:created_at,:z ).last(50) 
   end  
   # GET /arduino_devices/new
   def new

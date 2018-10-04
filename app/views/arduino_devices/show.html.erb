@@ -1,5 +1,8 @@
-<p id="notice"><%= notice %></p>
 
+<p id="notice"><%= notice %></p>
+<button onclick="delayPrint()">Imprimir Reporte</button>
+
+<div id='section-to-print'>
 <p>
   <strong>Chipid:</strong>
   <%= @arduino_device.chipid %>
@@ -23,28 +26,29 @@
 <p>
 
   <strong>Historial de Dispositivo:</strong>  
-  <div class="col-md-12">
-  	<div class="col-md-4">
+  <div class="col-md-9">
+  	<div class="col-md-3">
       <div id="cow_state"> </div>
   		  <h1>Eje X</h1>
-  <%= line_chart arduino_device_get_last_moves_x_path(@arduino_device), id: "x",   height: "200px" %>
+  <%= line_chart arduino_device_get_last_moves_x_path(@arduino_device), id: "x",   height: "200px", widht: "80%" %>
   	</div>
 
-  	<div class="col-md-4">
+  	<div class="col-md-3">
   		
   <h1>Eje Y</h1>
-  <%= line_chart arduino_device_get_last_moves_y_path(@arduino_device), id: "y",  height: "200px" %>
+  <%= line_chart arduino_device_get_last_moves_y_path(@arduino_device), id: "y",  height: "200px", widht: "80%" %>
   	</div>
-  	<div class="col-md-4">
+  	<div class="col-md-3">
   		
   <h1>Eje Z</h1>
-  <%= line_chart arduino_device_get_last_moves_z_path(@arduino_device), id: "z",  height: "200px" %>
+  <%= line_chart arduino_device_get_last_moves_z_path(@arduino_device), id: "z",  height: "200px", widht: "80%" %>
   	</div>
   </div>
 <h2>Detalles de movimiento</h2>
 <div id="msn">Cargando...</div>
 
 </p>
+</div>
 <%= link_to 'Edit', edit_arduino_device_path(@arduino_device) %> |
 <%= link_to 'Back', arduino_devices_path %>
 <script type="text/javascript">
@@ -78,7 +82,7 @@
         }
     });
 			
-		}, 5000);
+		}, 3000);
 	});
 </script>
 <script type="text/javascript">
@@ -95,19 +99,22 @@
         }
     });
 			
-		}, 5000);
+		}, 3000);
 	});
 </script>
 
 <script>
-  
+    function delayPrint() { 
+    window.print(); 
+}
     $(document).on('turbolinks:load', function(event) {
     
     setInterval(function(){ 
        $.ajax({url: "/arduino_devices/<%=@arduino_device.id%>/get_last_moves", success: function(result){
+        
         $("#msn").html(result);
       }});
       
-    }, 5000);
+    }, 3000);
   });
 </script>
