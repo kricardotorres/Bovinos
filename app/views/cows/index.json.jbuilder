@@ -1,4 +1,4 @@
-json.array!(@veterinaries) do |veterinary|
-  json.extract! veterinary, :id, :name, :description
-  json.url veterinary_url(veterinary, format: :json)
+json.array!(@cows) do |cow|
+  json.extract! cow, :id, :name, :description
+  json.url cow_url(cow, format: :json)
 end

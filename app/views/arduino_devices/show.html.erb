@@ -1,120 +1,100 @@
+<div class="row">  
 
-<p id="notice"><%= notice %></p>
-<button onclick="delayPrint()">Imprimir Reporte</button>
+  <div id="target-1" class="span12">
 
-<div id='section-to-print'>
-<p>
-  <strong>Chipid:</strong>
-  <%= @arduino_device.chipid %>
-</p>
-
-<p>
-  <strong>Model:</strong>
-  <%= @arduino_device.model %>
-</p>
-
-<p>
-  <strong>Usuario:</strong>
-  <%= @arduino_device.user.name %>
-</p>
-
-<p>
-  <strong>ID de Bovino:</strong>
-  <%= @arduino_device.cow.id %>
-</p>
  
-<p>
 
-  <strong>Historial de Dispositivo:</strong>  
-  <div class="col-md-9">
-  	<div class="col-md-3">
-      <div id="cow_state"> </div>
-  		  <h1>Eje X</h1>
-  <%= line_chart arduino_device_get_last_moves_x_path(@arduino_device), id: "x",   height: "200px", widht: "80%" %>
-  	</div>
 
-  	<div class="col-md-3">
-  		
-  <h1>Eje Y</h1>
-  <%= line_chart arduino_device_get_last_moves_y_path(@arduino_device), id: "y",  height: "200px", widht: "80%" %>
-  	</div>
-  	<div class="col-md-3">
-  		
-  <h1>Eje Z</h1>
-  <%= line_chart arduino_device_get_last_moves_z_path(@arduino_device), id: "z",  height: "200px", widht: "80%" %>
-  	</div>
-  </div>
-<h2>Detalles de movimiento</h2>
-<div id="msn">Cargando...</div>
+      <h1>Detalles</h1>
 
-</p>
-</div>
-<%= link_to 'Edit', edit_arduino_device_path(@arduino_device) %> |
-<%= link_to 'Back', arduino_devices_path %>
-<script type="text/javascript">
-	$(document).on('turbolinks:load', function(event) {
-		
-		setInterval(function(){ 
-			var chart = Chartkick.charts["x"]
-			$.ajax({
-				url: "/arduino_devices/<%=@arduino_device.id%>/get_last_moves_x",
-				type: 'GET',
-        dataType: 'json', // added data type
-        success: function(res) {
-        	chart.updateData(res);
-        }
-    });
-			
-		}, 3000);
-	});
-</script>
-<script type="text/javascript">
-	$(document).on('turbolinks:load', function(event) {
-		
-		setInterval(function(){ 
-			var chart = Chartkick.charts["y"]
-			$.ajax({
-				url: "/arduino_devices/<%=@arduino_device.id%>/get_last_moves_y",
-				type: 'GET',
-        dataType: 'json', // added data type
-        success: function(res) {
-        	chart.updateData(res);
-        }
-    });
-			
-		}, 3000);
-	});
-</script>
-<script type="text/javascript">
-	$(document).on('turbolinks:load', function(event) {
-		
-		setInterval(function(){ 
-			var chart = Chartkick.charts["z"]
-			$.ajax({
-				url: "/arduino_devices/<%=@arduino_device.id%>/get_last_moves_z",
-				type: 'GET',
-        dataType: 'json', // added data type
-        success: function(res) {
-        	chart.updateData(res);
-        }
-    });
-			
-		}, 3000);
-	});
-</script>
+
+      <p id="notice"><%= notice %></p>
+      <button onclick="delayPrint()">Imprimir Reporte</button>
+      <%= search_form_for @q, url: arduino_device_search_path(@arduino_device),
+      html: { method: :post } do |f| %>
+
+      <br> 
+      <div class="span12">
+        <%= f.label :created_at,"Fecha", class: "control-label span1" %>
+        <div class="span3">
+          <%= f.text_field :created_at, type: "date", class: "form-control", value: @current_date if @current_date %>
+        </div>
+
+      </div> 
+
+
+      <%= f.submit t('search') , :class => "btn btn-success" %>
+
+      <% end %>
+      <div id='section-to-print'>
+        <div class="row"> 
+            <h1>Datos del Bovino</h1>
+            <p>
+               <strong>Fecha:</strong>
+             <%= @current_date %></p>
+
+          <p>
+            <strong>Chipid:</strong>
+            <%= @arduino_device.chipid %>
+          </p>
+
+          <p>
+            <strong>Model:</strong>
+            <%= @arduino_device.model %>
+          </p>
+
+          <p>
+            <strong>Usuario:</strong>
+            <%= @arduino_device.user.name %>
+          </p>
+
+          <p>
+            <strong>ID de Bovino:</strong>
+            <%= @arduino_device.cow.id %>
+          </p>  
+            <div class="span12"> 
+              <div id="msn">Cargando...
+                  <div id="big_stats" class="cf">
+
+
+                  </div>
+                  <!-- .stat --> 
+                </div>
+
+
+           </div>
+           
+ 
+      
+
+
+
+                </div>
+                
+
+
+ 
+            </div>
+
+          
+
+        </div> <!-- /widget -->
+
+      </div> <!-- /span12 --> 
+ 
 
 <script>
-    function delayPrint() { 
+  function delayPrint() { 
     window.print(); 
-}
-    $(document).on('turbolinks:load', function(event) {
-    
+  }
+  $(document).on('turbolinks:load', function(event) {
+
     setInterval(function(){ 
-       $.ajax({url: "/arduino_devices/<%=@arduino_device.id%>/get_last_moves", success: function(result){
-        
-        $("#msn").html(result);
-      }});
-      
-    }, 3000);
+     $.ajax({url: "/arduino_devices/<%=@arduino_device.id%>/get_last_moves?current_date=<%=@current_date%>", success: function(result){
+
+      $("#msn").html(result);
+    }});
+
+   }, 3000);
   });
 </script>

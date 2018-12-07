@@ -12,6 +12,17 @@ class Api::CowHistoriesController  < ActionController::Base
   def create
     @cow_history = CowHistory.new(cow_history_params)
     @cow_history.cow_id = 1
+    @cow= Cow.find(1)
+    #
+    histos=@cow.cow_histories.last(10)
+    sumx=0
+    sumy=0
+    histos.each_with_index do |histo, index|
+      sumx+=histo.x.to_f
+      sumy+=histo.y.to_f
+    end
+ 
+    WarningMailer.warning_behave(@cow).deliver if (-16..+16).include?((sumx / histos.count))&&(-16..+16).include?((sumy / histos.count))
     @cow_history.arduino_device_id = 1
     if @cow_history.save
       render json: @cow_history, status: :created

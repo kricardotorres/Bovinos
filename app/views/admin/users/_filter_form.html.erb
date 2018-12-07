@@ -26,12 +26,7 @@
 							<%= search_field_tag "q[last_name_cont]",nil,class: "form-control" , placeholder: t('users.lastname') %>
 						</div>  
 					</div>
-					<div class="col-md-12 m-b-20">
-						<label class="col-md-12"><%= t("users.role")%></label>
-						<div class="col-md-6">
-							<%= select_tag "q[role_id_eq]", options_from_collection_for_select(Role.all, "id", "rol_name"), prompt: t('choose_from_select'), class:"form-control"%>
-						</div>
-					</div>
+					 
 					 
 				</div>
 			</div>

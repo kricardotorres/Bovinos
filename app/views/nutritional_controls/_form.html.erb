@@ -1,0 +1,49 @@
+<%= form_with(model: nutritional_control, local: true) do |form| %>
+  <% if nutritional_control.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(nutritional_control.errors.count, "error") %> prohibited this nutritional_control from being saved:</h2>
+
+      <ul>
+      <% nutritional_control.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name, id: :nutritional_control_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :purpouse %>
+    <%= form.text_field :purpouse, id: :nutritional_control_purpouse %>
+  </div>
+
+  <div class="field">
+    <%= form.label :from_date %>
+    <%= form.date_select :from_date, id: :nutritional_control_from_date %>
+  </div>
+
+  <div class="field">
+    <%= form.label :to_date %>
+    <%= form.date_select :to_date, id: :nutritional_control_to_date %>
+  </div>
+
+
+  <div class="field">
+  <% Aliment.all.each do |aliment| %>
+        <%= check_box_tag "nutritional_control[aliment_ids][]", aliment.id, form.object.aliments.include?(aliment) %>
+        <%= aliment.name %>
+  <% end %>
+  </div>
+
+
+
+
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

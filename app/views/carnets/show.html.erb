@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Earing sup:</strong>
+  <%= @carnet.earing_sup %>
+</p>
+
+<p>
+  <strong>Earing inf:</strong>
+  <%= @carnet.earing_inf %>
+</p>
+
+<p>
+  <strong>Vacune:</strong>
+  <%= @carnet.vacune %>
+</p>
+
+<p>
+  <strong>Aplication date:</strong>
+  <%= @carnet.aplication_date %>
+</p>
+
+<p>
+  <strong>Weight:</strong>
+  <%= @carnet.weight %>
+</p>
+
+<%= link_to 'Edit', edit_carnet_path(@carnet) %> |
+<%= link_to 'Back', carnets_path %>

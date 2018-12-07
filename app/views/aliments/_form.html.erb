@@ -1,0 +1,22 @@
+<%= form_with(model: aliment, local: true) do |form| %>
+  <% if aliment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(aliment.errors.count, "error") %> prohibited this aliment from being saved:</h2>
+
+      <ul>
+      <% aliment.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name, id: :aliment_name %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

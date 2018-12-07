@@ -2,7 +2,7 @@
 
 <h1>Arduino Devices</h1>
 
-<table>
+<table class="table"> 
   <thead>
     <tr>
       <th>Chipid</th>
@@ -16,7 +16,8 @@
       <tr>
         <td><%= arduino_device.chipid %></td>
         <td><%= arduino_device.model %></td>
-        <td><%= link_to 'Show', arduino_device %></td>
+        <td><%= link_to 'Show', arduino_device_url(arduino_device ) %></td>
+         
         <td><%= link_to 'Edit', edit_arduino_device_path(arduino_device) %></td>
         <td><%= link_to 'Destroy', arduino_device, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>

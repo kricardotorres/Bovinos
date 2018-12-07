@@ -13,12 +13,12 @@
   <div class="col-lg-12">
     <div class="white-box">
       <h3 class="box-title m-b-0">Listado de Sucursales</h3>
-      <%= link_to  new_veterinary_path , {remote:true, class: "fcbtn btn btn-success btn-1e" } do %>
+      <%= link_to  new_cow_path , {remote:true, class: "fcbtn btn btn-success btn-1e" } do %>
       <i class="icon-plus"></i>
       <span>Nuevo</span>
       <%end%>
 
-       <%= link_to  filter_veterinaries_path , {remote:true, class: "fcbtn btn btn-primary btn-1e" } do %>
+       <%= link_to  filter_cows_path , {remote:true, class: "fcbtn btn btn-primary btn-1e" } do %>
       <i class="icon-search"></i>
       <span>Buscar</span>
       <%end%>
@@ -27,21 +27,20 @@
         <table class="table">
           <thead>
             <tr>
-              <th> <%= t('veterinaries.id')%> </th>
-              <th><%= t('veterinaries.name')%></th>
-              <th><%= t('veterinaries.email')%></th>
-              <th><%= t('veterinaries.created_at')%></th> 
+              <th> <%= t('cows.id')%> </th>
+              <th><%= t('cows.name')%></th> 
+              <th><%= t('cows.created_at')%></th> 
               <th colspan="3">Acciones</th>
             </tr> 
           </thead>
-          <tbody class="veterinaries-table-index">
-            <%= render 'veterinaries/partials/index'%>
+          <tbody class="cows-table-index">
+            <%= render 'cows/partials/index'%>
           </tbody>
           <tfoot>
             <td colspan="7">
               <div class="text-right">
                 <ul class="pagination">
-                  <%= paginate @veterinaries %>
+                  <%= paginate @cows %>
                 </ul>
               </div>
             </td>
@@ -52,5 +51,5 @@
   </div>
 </div> 
 
-<div id="modal-veterinaries" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div id="modal-cows" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 </div>

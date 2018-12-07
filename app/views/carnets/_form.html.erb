@@ -1,0 +1,49 @@
+<%= form_with(model: carnet, local: true) do |form| %>
+  <% if carnet.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(carnet.errors.count, "error") %> prohibited this carnet from being saved:</h2>
+
+      <ul>
+      <% carnet.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="field">
+    <p>Ejemplo</p>
+    <%= image_tag('arete.png',   alt:'arete')  %>  
+  </div>
+  <div class="field">
+    <%= form.label :earing_sup %>
+    <%= form.text_field :earing_sup, id: :carnet_earing_sup %>
+  </div>
+   
+  <div class="field">
+    <%= form.label :earing_inf %>
+    <%= form.text_field :earing_inf, id: :carnet_earing_inf %>
+  </div>
+
+  <div class="field">
+    <%= form.label :vacune %>
+    <%= form.text_field :vacune, id: :carnet_vacune %>
+  </div>
+
+  <div class="field">
+    <%= form.label :aplication_date %>
+    <%= form.date_select :aplication_date, id: :carnet_aplication_date %>
+  </div>
+
+  <div class="field">
+    <%= form.label :weight %>
+    <%= form.text_field :weight, id: :carnet_weight %>
+  </div>
+
+  <div class="field">
+    <%= form.label :cow %>
+    <%= form.collection_select(:cow_id, Cow.all, :id, :name) %>
+   </div>
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

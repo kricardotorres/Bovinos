@@ -6,50 +6,43 @@
 		</div>
 		<div class="modal-body">
 			<div class="form-group">
-			  
 				<div class="col-md-12 m-b-20">
-					<div class="control-label"><strong><%= t("veterinary.name")%>:</strong>
-						<p><%= @veterinary.user.name %> <%= @veterinary.user.lastname %></p>
+					<div class="control-label"><strong><%= t("cow.key_id")%>:</strong>
+						<p><%= @cow.key_id %>  </p>
 					</div>
 					
 				</div>
 				<!-- /.row -->
-				<hr>
-				<!-- .row -->
+				 
+				<!-- /.row -->
+               <hr>			  
 				<div class="col-md-12 m-b-20">
-					<div class="control-label"><strong><%= t('user.email') %>:</strong>
-						<p><%= @veterinary.user.email %></p> 
-
+					<div class="control-label"><strong><%= t("cow.name")%>:</strong>
+						<p><%= @cow.name %>  </p>
 					</div>
 					
 				</div>
+				<!-- /.row -->
+				 
 				<!-- /.row -->
                <hr>
 				<div class="col-md-12 m-b-20">
-					<div class="control-label"><strong><%= t('veterinary.clinic') %>:</strong>
-						<p><%= @veterinary.clinic %> </p> 
+					<div class="control-label"><strong><%= t('cow.birthday') %>:</strong>
+						<p><%= @cow.birthday %> </p> 
 
 					</div>
 					
 				</div>
 				<hr>
 				<div class="col-md-12 m-b-20">
-					<div class="control-label"><strong><%= t('veterinary.address') %>:</strong>
-						<p><%= @veterinary.address %> </p> 
+					<div class="control-label"><strong><%= t('cow.deaddate') %>:</strong>
+						<p><%= @cow.deaddate %> </p> 
 
 					</div>
 					
 				</div>
 				<hr>
-				
-				<hr>
-				<div class="col-md-12 m-b-20">
-					<div class="control-label"><strong><%= t('veterinary.phone') %>:</strong>
-						<p><%= @veterinary.phone %> </p> 
-
-					</div>
-					
-				</div>
+				 
 				<hr>		
  
 			</div>

@@ -1,18 +1,7 @@
 class Admin::UsersController < ApplicationController
   respond_to :html, :js
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-  
- #  authorize_resource
-  
-  # GET /admin/users
-  # GET /admin/users.json
-
-   #  rescue_from CanCan::AccessDenied do |exception|
- #   flash[:error] = "Access denied!"
-  #   redirect_to root_url
-   #  end
-
-
+ 
   def index
     search
   end
@@ -94,7 +83,7 @@ class Admin::UsersController < ApplicationController
     params[:per_page] = 10
     
     @q = User.search(params[:q])
-    @users = @q.result(:distinct => true).includes( :role).page(params[:page]).per(params[:per_page])  
+    @users = @q.result(:distinct => true).page(params[:page]).per(params[:per_page])  
   end
 
   private
@@ -105,7 +94,7 @@ class Admin::UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:email, :password, :password_confirmation, :name, :lastname, :role_id )
+      params.require(:user).permit(:email, :password, :password_confirmation, :name, :paginate, :status )
     end
    
     

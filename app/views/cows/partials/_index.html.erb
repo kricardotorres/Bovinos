@@ -1,19 +1,18 @@
-<% @veterinaries.each do |veterinary| %>
+<% @cows.each do |cow| %>
 <tr>
-	<td><%= veterinary.id %></td>
-	<td><%= veterinary.user.name %> <%= veterinary.user.lastname %></td> 
-	<td><%= veterinary.user.email %></td> 
-	<td><%= veterinary.created_at %></td> 
+	<td><%= cow.id %></td>
+	<td><%= cow.name %>  
+	<td><%= cow.created_at %></td> 
  	
 	 <td> 
-        <%=link_to veterinary, :class => "btn btn-small btn-primary", remote: true do %>
+        <%=link_to cow, :class => "btn btn-small btn-primary", remote: true do %>
           <i class="btn-icon-only icon-search"> </i>
         <%end%> 
-         <%= link_to edit_veterinary_path(veterinary), :class => "btn btn-small btn-warning", remote:true do %>
+         <%= link_to edit_cow_path(cow), :class => "btn btn-small btn-warning", remote:true do %>
           <i class="btn-icon-only icon-pencil"> </i>
         <%end%>
         
-         <%=link_to veterinary_delete_path(veterinary), :class => "btn btn-small btn-danger", remote:true  do %>
+         <%=link_to cow_delete_path(cow), :class => "btn btn-small btn-danger", remote:true  do %>
            <i class="btn-icon-only icon-trash"> </i>
         <%end%> 
     </td>

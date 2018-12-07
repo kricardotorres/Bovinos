@@ -10,7 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180617193700) do
+ActiveRecord::Schema.define(version: 20181201084908) do
+
+  create_table "aliments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "arduino_devices", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "chipid"
@@ -21,6 +27,18 @@ ActiveRecord::Schema.define(version: 20180617193700) do
     t.bigint "cow_id"
     t.index ["cow_id"], name: "index_arduino_devices_on_cow_id"
     t.index ["user_id"], name: "index_arduino_devices_on_user_id"
+  end
+
+  create_table "carnets", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "earing_sup"
+    t.string "earing_inf"
+    t.string "vacune"
+    t.date "aplication_date"
+    t.decimal "weight", precision: 10
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "cow_id"
+    t.index ["cow_id"], name: "index_carnets_on_cow_id"
   end
 
   create_table "cow_histories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -47,6 +65,21 @@ ActiveRecord::Schema.define(version: 20180617193700) do
     t.index ["farm_id"], name: "index_cows_on_farm_id"
   end
 
+  create_table "create_aliments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "create_nutritional_controls", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "name"
+    t.string "purpouse"
+    t.date "from_date"
+    t.date "to_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "farms", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
     t.string "address"
@@ -57,6 +90,24 @@ ActiveRecord::Schema.define(version: 20180617193700) do
 
   create_table "messages", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "nutritional_control_has_aliments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "aliment_id"
+    t.bigint "nutritional_control_id"
+    t.index ["aliment_id"], name: "index_nutritional_control_has_aliments_on_aliment_id"
+    t.index ["nutritional_control_id"], name: "index_nutritional_control_has_aliments_on_nutritional_control_id"
+  end
+
+  create_table "nutritional_controls", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "name"
+    t.string "purpouse"
+    t.date "from_date"
+    t.date "to_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -145,9 +196,12 @@ ActiveRecord::Schema.define(version: 20180617193700) do
 
   add_foreign_key "arduino_devices", "cows"
   add_foreign_key "arduino_devices", "users"
+  add_foreign_key "carnets", "cows"
   add_foreign_key "cow_histories", "arduino_devices"
   add_foreign_key "cow_histories", "cows"
   add_foreign_key "cows", "farms"
+  add_foreign_key "nutritional_control_has_aliments", "aliments"
+  add_foreign_key "nutritional_control_has_aliments", "nutritional_controls"
   add_foreign_key "oauth_access_grants", "oauth_applications", column: "application_id"
   add_foreign_key "oauth_access_tokens", "oauth_applications", column: "application_id"
   add_foreign_key "users", "roles"

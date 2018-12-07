@@ -35,12 +35,28 @@ Rails.application.configure do
   config.active_support.deprecation = :log
 
   # Raise an error on page load if there are pending migrations.
-  config.active_record.migration_error = :page_load
-  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+  config.active_record.migration_error = :page_load 
   # Debug mode disables concatenation and preprocessing of assets.
   # This option may cause significant delays in view rendering with a large
   # number of complex assets.
   config.assets.debug = true
+
+
+  
+
+  config.action_mailer.raise_delivery_errors = true
+  
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+      address: "detei.com.mx",
+      port: 587,
+      authentication: "plain",
+      enable_starttls_auto: false,
+      user_name: "dtuyin@detei.com.mx",
+      password: "d0v4nn1"
+
+  }
 
   # Suppress logger output for asset requests.
   config.assets.quiet = true

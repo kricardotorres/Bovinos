@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Nutritional Controls</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Purpouse</th>
+      <th>From date</th>
+      <th>To date</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @nutritional_controls.each do |nutritional_control| %>
+      <tr>
+        <td><%= nutritional_control.name %></td>
+        <td><%= nutritional_control.purpouse %></td>
+        <td><%= nutritional_control.from_date %></td>
+        <td><%= nutritional_control.to_date %></td>
+        <td><%= link_to 'Show', nutritional_control %></td>
+        <td><%= link_to 'Edit', edit_nutritional_control_path(nutritional_control) %></td>
+        <td><%= link_to 'Destroy', nutritional_control, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Nutritional Control', new_nutritional_control_path %>

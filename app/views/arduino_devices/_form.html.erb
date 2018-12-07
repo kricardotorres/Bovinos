@@ -9,7 +9,7 @@
       <% end %>
       </ul>
     </div>
-  <% end %>
+  <% end %> 
 
   <div class="field">
     <%= form.label :chipid %>
@@ -19,6 +19,10 @@
   <div class="field">
     <%= form.label :model %>
     <%= form.text_field :model, id: :arduino_device_model %>
+  </div>
+  <div class="field">
+    <%= form.label :cow %>
+   <%=form.collection_select :cow_id, Cow.where("deleted_at IS NULL"), :id, :name, {prompt: 'Selecciona...'}, class:"form-control" %>
   </div>
 
   <div class="actions">

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>PDF report</title> 
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/chartkick/2.2.4/chartkick.min.js"></script>
+  <meta charset="utf-8" />
+</head>
+<body>
+<div class="row">  
+
+  <div id="target-1" class="span12">
+
+ 
+
+
+      <h1>Detalles</h1>
+
+
+      <p id="notice"><%= notice %></p>
+      <button onclick="delayPrint()">Imprimir Reporte</button>
+      <%= search_form_for @q, url: arduino_device_search_path(@arduino_device),
+      html: { method: :post } do |f| %>
+
+      <br> 
+      <div class="span12">
+        <%= f.label :created_at,"Fecha", class: "control-label span1" %>
+        <div class="span3">
+          <%= f.text_field :created_at, type: "date", class: "form-control", value: @current_date if @current_date %>
+        </div>
+
+      </div> 
+
+
+      <%= f.submit t('search') , :class => "btn btn-success" %>
+
+      <% end %>
+      <div id='section-to-print'>
+        <div class="row">
+          <i class="icon-list-alt"></i>
+            <h1>Datos del Bovino</h1>
+           
+
+          <p>
+            <strong>Chipid:</strong>
+            <%= @arduino_device.chipid %>
+          </p>
+
+          <p>
+            <strong>Model:</strong>
+            <%= @arduino_device.model %>
+          </p>
+
+          <p>
+            <strong>Usuario:</strong>
+            <%= @arduino_device.user.name %>
+          </p>
+
+          <p>
+            <strong>ID de Bovino:</strong>
+            <%= @arduino_device.cow.id %>
+          </p>  
+            <div class="span12"> 
+              <h1>Tiempo de Actividad (en Minutos)</h1>
+              <div id="msn">
+              	<div class="span12">
+				<div class="span7">
+				<p>Tiempo Total Caminando:
+				<%= (@caminando/60).to_i.to_s %> Minutos
+				(Normal debe ser aproximadamente 240)
+				<br>
+				Tiempo Total de Pie:
+				<%= (@parada/60).to_i.to_s %> Minutos  
+				<br>
+				Tiempo Total de Sentada:
+				<%= (@sentada/60).to_i.to_s %> Minutos
+				(Normal debe ser entre 720-600)
+				<br>
+				Tiempo Total de Sueño:
+				<%= (@dormida/60 ).to_i.to_s %> Minutos
+				(Normal debe ser entre 300-200)
+				<br></p>
+				</div>
+				<div class="span3">
+				<p>Ultimo estado: </p>
+				<br>
+				<%= wicked_pdf_image_tag(@current_state,   alt: @current_state) if @current_state%>   
+				</div>
+				</div>
+                  <!-- .stat --> 
+                </div>
+
+           
+           </div>
+           
+ 
+        <h1>Comparativo con el tiempo promedio de un bovino sano</h1>
+        <div class="span4">
+          <%= column_chart [{"name":"Minutos","data":[["Caminando ",(@caminando/60).to_i.to_s] ]},
+          {"name":"Minutos en Promedio","data":[ 
+            ["Caminando ",240] 
+            ]}] %>
+          </div>
+          <div class="span4">
+            <%= column_chart [{"name":"Minutos","data":[ 
+              ["Sentada ",(@sentada/60).to_i.to_s] ]},
+              {"name":"Minutos en Promedio","data":[ 
+
+                ["Sentada ",720] 
+                ]}] %>
+              </div>
+              <div class="span4">
+                <%= column_chart [{"name":"Minutos","data":[ 
+                  ["Sueño",(@dormida/60).to_i.to_s] ]},
+                  {"name":"Minutos en Promedio","data":[  
+                    ["Sueño",300] 
+                    ]}] %>
+                  </div>
+
+
+
+                </div>
+                
+
+
+
+             
+            </div>
+
+          
+
+        </div> <!-- /widget -->
+
+      </div> <!-- /span12 --> 
+     
+ 
+</body>
+</html>

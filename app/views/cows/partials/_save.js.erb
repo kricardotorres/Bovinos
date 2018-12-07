@@ -1,11 +1,11 @@
 $("ul.errors").html("")
-<% if @veterinary.errors.any? %>
-  <% @veterinary.errors.full_messages.each do |message| %>
+<% if @cow.errors.any? %>
+  <% @cow.errors.full_messages.each do |message| %>
     $("ul.errors").append($("<li />").html("<%= message.html_safe %>"))
   <% end %> 
-  $("#modal-veterinaries").animate({ scrollTop: 0 }, 'slow')
+  $("#modal-cows").animate({ scrollTop: 0 }, 'slow')
 <% else %>
-  $(".veterinaries-table-index").html("<%= j(render 'veterinaries/partials/index') %>")
+  $(".cows-table-index").html("<%= j(render 'cows/partials/index') %>")
   $("ul.msg").append($("<li />").html("<%= @msgResult %>"))
-  $("#modal-veterinaries").modal("hide")
+  $("#modal-cows").modal("hide")
 <% end %>

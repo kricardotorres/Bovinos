@@ -1,4 +1,4 @@
-<%= form_for @veterinary,remote: true, html: { class: "form-horizontal form-material",role: "form" } do |f| %>		
+<%= form_for @cow,remote: true, html: { class: "form-horizontal form-material",role: "form" } do |f| %>		
 <div class="modal-body">		
 	<div class="form-group"> 
 		<div style="background-color:red; color:white; font-weight:bold;">		
@@ -6,71 +6,36 @@
 		</div>		
 
 
-		<%= f.fields_for :user do |ff| %>
+		 
 		<div class="col-md-12 m-b-20"> 
-			<label class="col-md-12"><%= t("users.name")%></label>
+			<label class="col-md-12"><%= t("cows.name")%></label>
 			<div class="col-md-12">
-				<%= ff.text_field :name, class: "form-control"   %>
+				<%= f.text_field :name, class: "form-control"   %>
 			</div>  
-		</div> <hr>
-		<div class="col-md-12 m-b-20"> 
-			<label class="col-md-12"><%= t("users.lastname")%></label>
-			<div class="col-md-12">
-				<%= ff.text_field :lastname, class: "form-control" %>
-			</div>  
-		</div>
-		<hr>	
-		<%if @veterinary.user.new_record?%>
-		<div class="col-md-12 m-b-20"> 
-			<label class="col-md-12"><%= t("users.email")%></label>
-			<div class="col-md-12">
-				<%= ff.text_field :email, class: "form-control"   %>
-			</div>
-		</div>
-		<hr>
-		
-		<div class="col-md-12 m-b-20"> 
-			<label class="col-md-12"><%= t("users.password")%></label>
-			<div class="col-md-12">
-				<%= ff.password_field :password, class: "form-control"   %>
-			</div>
-		</div> <hr>
-		<div class="col-md-12 m-b-20"> 
-			<label class="col-md-12"><%= t("users.password_confirmation")%></label>
-			 
-				<%= ff.password_field :password_confirmation, class: "form-control"   %>
-			 
-		</div> 
-		<hr> 
-		<%end%>
-		<% end %>
+		</div>  
+		  
+		 
 		<hr>
 		<div class="col-md-12 m-b-20"> 
-			<label class="col-md-12"><%= t("users.clinic")%></label>
+			<label class="col-md-12"><%= t("cows.key_id")%></label>
 			<div class="col-md-12">
-				<%= f.text_field :clinic, class: "form-control"   %>
+				<%= f.text_field :key_id, class: "form-control"   %>
 			</div>  
 		</div>
+		 
 		<hr>
 		<div class="col-md-12 m-b-20"> 
-			<label class="col-md-12"><%= t("users.address")%></label>
+			<label class="col-md-12"><%= t("cows.birthday")%></label>
 			<div class="col-md-12">
-				<%= f.text_field :address, class: "form-control"   %>
-			</div>  
-		</div>
-		<hr>
-		<div class="col-md-12 m-b-20"> 
-			<label class="col-md-12"><%= t("users.phone")%></label>
-			<div class="col-md-12">
-				<%= f.text_field :phone, class: "form-control"   %>
+				<%= f.date_field :birthday, class: "form-control"   %>
 			</div>  
 		</div>
 		<hr>
 
 		<div class="col-md-12 m-b-20"> 
-			<label class="col-md-12"><%= t("users.web_site")%></label>
+			<label class="col-md-12"><%= t("cows.deaddate")%></label>
 			<div class="col-md-12">
-				<%= f.text_field :web_site, class: "form-control"   %>
+				<%= f.date_field :deaddate, class: "form-control"   %>
 			</div>  
 		</div>
 		<hr>
