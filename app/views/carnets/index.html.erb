@@ -1,35 +1,53 @@
-<p id="notice"><%= notice %></p>
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="header">
+        <h4 class="title"><i class="pe-7s-graph"></i> Control de Vacunas</h4>
+        <p class="category"><%= notice %></p>
+      </div>
+      <div class="content  ">
+        <i class="fa fa-plus"></i> <%= link_to 'New Carnet', new_carnet_path %>
+        <table class="table table-hover table-striped">
+          <thead>
+            <tr>
+              <th>Earing sup</th>
+              <th>Earing inf</th>
+              <th>Vacune</th>
+              <th>Aplication date</th>
+              <th>Weight</th>
+              <th colspan="3"></th>
+            </tr>
+          </thead>
 
-<h1>Carnets</h1>
+          <tbody>
+            <% @carnets.each do |carnet| %>
+            <tr>
+              <td><%= carnet.earing_sup %></td>
+              <td><%= carnet.earing_inf %></td>
+              <td><%= carnet.vacune %></td>
+              <td><%= carnet.aplication_date %></td>
+              <td><%= carnet.weight %></td>
+              <td><%= link_to 'Show', carnet %></td>
+              <td><%= link_to 'Edit', edit_carnet_path(carnet) %></td>
+              <td><%= link_to 'Destroy', carnet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th>Earing sup</th>
-      <th>Earing inf</th>
-      <th>Vacune</th>
-      <th>Aplication date</th>
-      <th>Weight</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+        <br>
 
-  <tbody>
-    <% @carnets.each do |carnet| %>
-      <tr>
-        <td><%= carnet.earing_sup %></td>
-        <td><%= carnet.earing_inf %></td>
-        <td><%= carnet.vacune %></td>
-        <td><%= carnet.aplication_date %></td>
-        <td><%= carnet.weight %></td>
-        <td><%= link_to 'Show', carnet %></td>
-        <td><%= link_to 'Edit', edit_carnet_path(carnet) %></td>
-        <td><%= link_to 'Destroy', carnet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
 
-<br>
+        <div class="footer">
+         
+          <div class="stats">
+           
+          </div>
+        </div>
+        
+      </div>
 
-<%= link_to 'New Carnet', new_carnet_path %>
+    </div>
+
+  </div>
+</div>

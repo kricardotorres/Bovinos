@@ -1,76 +1,136 @@
 <%#= @total.html_safe %>
-<div class="row">
-<div class="span6">
-<div class="widget">
-	<div class="widget-header"> <i class="icon-list-alt"></i>
-              <h3> Tiempo de Actividad (en Minutos) </h3>
- </div>
-<div class="widget-content">
-<p>Tiempo Total Caminando:
-<%= (@caminando/60).to_i.to_s %> Minutos
-(Normal debe ser aproximadamente 240)
-<br>
-Tiempo Total de Pie:
-<%= (@parada/60).to_i.to_s %> Minutos  
-<br>
-Tiempo Total de Sentada:
-<%= (@sentada/60).to_i.to_s %> Minutos
-(Normal debe ser entre 720-600)
-<br>
-Tiempo Total de Sueño:
-<%= (@dormida/60 ).to_i.to_s %> Minutos
-(Normal debe ser entre 300-200)
-<br></p>
-</div>
-</div>
-<div class="widget">
-	<div class="widget-header"> <i class="icon-list-alt"></i>
-              <h3> Ultimo estado </h3>
- </div>
-  
- <div class="widget-content">  <%= image_tag(@current_state,   alt: @current_state) if @current_state%> </div> 
-</div>
-<div class="widget">
-	<div class="widget-header"> <i class="icon-list-alt"></i>
-              <h3> Balance de comportamiento </h3>
- </div>
- <div class="widget-content"> 
- <div id="donut" style="height: 300px;"></div> 
-            
-           <script>
-            new Chartkick.PieChart("donut", [["Caminando ",<%=(@caminando/60).to_i.to_s%>],["Sueño",<%=(@dormida/60).to_i.to_s.to_s%> ],["parada",<%=(@parada/60).to_i.to_s%>],["Sentada ", <%=(@sentada/60).to_i.to_s%>]],{download: "donut"});
-          </script>
-  </div>
-</div>
-</div> 
-        <div class="span6" style="  page-break-after: always;"> 
-        <div class="widget">
-	<div class="widget-header"> <i class="icon-list-alt"></i>
-              <h3> Comparativo con el tiempo promedio de un bovino sano </h3>
- </div>
-  		<div class="widget-content"> 
-        <div class="span4">
-          <%= column_chart [{"name":"Minutos","data":[["Caminando ",(@caminando/60).to_i.to_s] ]},
-          {"name":"Minutos en Promedio","data":[ 
-            ["Caminando ",240] 
-            ]}] %>
-          </div>
-          <div class="span4">
-            <%= column_chart [{"name":"Minutos","data":[ 
-              ["Sentada ",(@sentada/60).to_i.to_s] ]},
-              {"name":"Minutos en Promedio","data":[ 
 
-                ["Sentada ",720] 
+<div class="col-md-6">
+  <div class="card" >
+
+    <div class="header">
+      <h4 class="title"><i class="pe-7s-signal"></i>Balance de comportamiento</h4>
+      
+    </div> 
+    <div class="content">  
+
+     <div id="donut" style="height: 300px;"></div> 
+     
+     <script>
+      new Chartkick.PieChart("donut", [["Caminando ",<%=(@caminando/60).to_i.to_s%>],["Sueño",<%=(@dormida/60).to_i.to_s.to_s%> ],["parada",<%=(@parada/60).to_i.to_s%>],["Sentada ", <%=(@sentada/60).to_i.to_s%>]],{download: "donut"});
+    </script>
+  </div>
+  
+</div>
+</div>
+<div class="col-md-3">
+  <div class="card" >
+
+    <div class="header">
+      <h4 class="title"><i class="pe-7s-clock"></i> Tiempo de Actividad (en Minutos)</h4>
+
+    </div> 
+    <div class="content"> 
+      <ul>
+        <li>Tiempo Total Caminando:
+        <%= (@caminando/60).to_i.to_s %> Minutos
+        (Normal debe ser aproximadamente 240)</li>
+        <li>
+        Tiempo Total de Pie:
+        <%= (@parada/60).to_i.to_s %> Minutos </li>
+        <li>
+        Tiempo Total de Sentada:
+        <%= (@sentada/60).to_i.to_s %> Minutos
+        (Normal debe ser entre 720-600)</li>
+        <li>
+        Tiempo Total de Sueño:
+        <%= (@dormida/60 ).to_i.to_s %> Minutos
+        (Normal debe ser entre 300-200)</li>
+      </ul>
+ 
+      </div>
+
+    </div>
+  </div>   
+
+
+
+  <div class="col-md-3">
+    <div class="card" >
+
+      <div class="header">
+        <h4 class="title"><i class="pe-7s-signal"></i>Ultimo estado </h4>
+
+      </div> 
+      <div class="content"> 
+
+
+
+       <%= image_tag(@current_state,   alt: @current_state,   height: '130px') if @current_state%> 
+     </div>
+
+   </div>
+ </div>   
+
+
+
+ <div class="col-md-4">
+  <div class="card" >
+
+    <div class="header">
+      <h4 class="title"><i class="pe-7s-signal"></i>Sueño</h4>
+
+    </div> 
+    <div class="content">   
+
+
+    
+            <%= column_chart [{"name":"Minutos","data":[ 
+              ["Sueño",(@dormida/60).to_i.to_s] ]},
+              {"name":"Minutos en Promedio","data":[  
+                ["Sueño",300] 
                 ]}] %>
+
               </div>
-              <div class="span4">
-                <%= column_chart [{"name":"Minutos","data":[ 
-                  ["Sueño",(@dormida/60).to_i.to_s] ]},
-                  {"name":"Minutos en Promedio","data":[  
-                    ["Sueño",300] 
-                    ]}] %>
-                  </div>
-                  </div>
-                  </div>
-                  </div>
-                  </div>
+              
+            </div>
+          </div>
+ <div class="col-md-4">
+  <div class="card" >
+
+    <div class="header">
+      <h4 class="title"><i class="pe-7s-signal"></i>Sentada</h4>
+
+    </div> 
+    <div class="content">   
+
+
+     
+        <%= column_chart [{"name":"Minutos","data":[ 
+          ["Sentada ",(@sentada/60).to_i.to_s] ]},
+          {"name":"Minutos en Promedio","data":[ 
+
+            ["Sentada ",720] 
+            ]}] %>
+ 
+
+              </div>
+              
+            </div>
+          </div>
+ <div class="col-md-4">
+  <div class="card" >
+
+    <div class="header">
+      <h4 class="title"><i class="pe-7s-signal"></i>Caminando</h4>
+
+    </div> 
+    <div class="content">   
+
+
+      <%= column_chart [{"name":"Minutos","data":[["Caminando ",(@caminando/60).to_i.to_s] ]},
+      {"name":"Minutos en Promedio","data":[ 
+        ["Caminando ",240] 
+        ]}] %>
+
+ >
+
+              </div>
+              
+            </div>
+          </div>

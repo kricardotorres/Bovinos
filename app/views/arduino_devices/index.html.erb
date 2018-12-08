@@ -1,30 +1,45 @@
-<p id="notice"><%= notice %></p>
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="header">
+        <h4 class="title"><i class="pe-7s-signal"></i> Mis arduinos</h4>
+        <p class="category"><%= notice %></p>
+      </div>
+      <div class="content  ">
+        <i class="fa fa-plus"></i> <%= link_to 'New Arduino Device', new_arduino_device_path %>
+        <table class="table table-hover table-striped"> 
+          <thead>
+            <tr>
+              <th>Chipid</th>
+              <th>Model</th>
+              <th colspan="3"></th>
+            </tr>
+          </thead>
 
-<h1>Arduino Devices</h1>
+          <tbody>
+            <% @arduino_devices.each do |arduino_device| %>
+            <tr>
+              <td><%= arduino_device.chipid %></td>
+              <td><%= arduino_device.model %></td>
+              <td><%= link_to 'Show', arduino_device_url(arduino_device ) %></td>
+              
+              <td><%= link_to 'Edit', edit_arduino_device_path(arduino_device) %></td>
+              <td><%= link_to 'Destroy', arduino_device, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
 
-<table class="table"> 
-  <thead>
-    <tr>
-      <th>Chipid</th>
-      <th>Model</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @arduino_devices.each do |arduino_device| %>
-      <tr>
-        <td><%= arduino_device.chipid %></td>
-        <td><%= arduino_device.model %></td>
-        <td><%= link_to 'Show', arduino_device_url(arduino_device ) %></td>
+        <div class="footer">
          
-        <td><%= link_to 'Edit', edit_arduino_device_path(arduino_device) %></td>
-        <td><%= link_to 'Destroy', arduino_device, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+          <div class="stats">
+           
+          </div>
+        </div>
+        
+      </div>
 
-<br>
+    </div>
 
-<%= link_to 'New Arduino Device', new_arduino_device_path %>
+  </div>
+</div>

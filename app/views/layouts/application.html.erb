@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html> 
   <head> 
     <title>Bovinos</title>
     <%= csrf_meta_tags %> 
@@ -8,189 +8,168 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"> 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pixeden-stroke-7-icon@1.2.3/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css">
     <%= action_cable_meta_tag %>
      <script src="https://cdnjs.cloudflare.com/ajax/libs/highcharts/6.0.7/adapters/standalone-framework.js"></script>
  	 <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
 
+  </head> 
   <body>
 
-  <div class="navbar navbar-fixed-top">
-    
-    <div class="navbar-inner">
-        
-        <div class="container">
-            
-            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </a>
-            
-            <a class="brand" href="#">
-                Control de Bovinos
-            </a>        
-      <div class="nav-collapse">
-        <ul class="nav pull-right">
-           
-          <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
-                            class="icon-user"></i> <%= current_user.name+" "+current_user.lastname %> <b class="caret"></b></a>
-            <ul class="dropdown-menu">
-              <li><a href="javascript:;">Profile</a></li>
+<div class="wrapper">
+      <div class="sidebar" data-color="green" data-image="<%=image_path('sidebar-5')%>">
+
+    <!--
+
+        Tip 1: you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple"
+        Tip 2: you can also add an image using data-image tag
+
+    -->
+
+      <div class="sidebar-wrapper">
+            <div class="logo">
+                <a href="http://www.creative-tim.com" class="simple-text">
+                   Control de Bovinos
+                </a>
+            </div>
+
+            <ul class="nav">
+                <li class="">
+                      <%=link_to root_path,  data: { turbolinks: false }, class:'shortcut'   do %>
+                      <i class="pe-7s-home"></i>
+                      <p  >Inicio</p> 
+                      <%end%> 
+                </li>
+                <li class="">
+                      <%=link_to arduino_devices_path,  data: { turbolinks: false }, class:'shortcut'   do %>
+                      <i class="pe-7s-signal"></i>
+                      <p  >Mis arduinos</p> 
+                      <%end%> 
+                </li>
+                <li class="">
+                      <%=link_to cows_path,  data: { turbolinks: false }, class:'shortcut'   do %>
+                      <i class="pe-7s-medal"></i>
+                      <p  >Bovinos</p> 
+                      <%end%> 
+                </li>
+                <li class="">
+                      <%=link_to veterinaries_path,  data: { turbolinks: false }, class:'shortcut'   do %>
+                      <i class="pe-7s-eyedropper"></i>
+                      <p  >Veterinarios</p> 
+                      <%end%> 
+                </li>
+                <li class="">
+                      <%=link_to admin_users_path,  data: { turbolinks: false }, class:'shortcut'   do %>
+                      <i class="pe-7s-user"></i>
+                      <p  >Usuarios</p> 
+                      <%end%> 
+                </li>
+                <li class="">
+                      <%=link_to nutritional_controls_path,  data: { turbolinks: false }, class:'shortcut'   do %>
+                      <i class="pe-7s-graph"></i>
+                      <p  >Control Nutricional</p> 
+                      <%end%> 
+                </li>
+                <li class="">
+                      <%=link_to carnets_path,  data: { turbolinks: false }, class:'shortcut'   do %>
+                      <i class="pe-7s-note2"></i>
+                      <p  >Control de Vacunas</p> 
+                      <%end%> 
+                </li>
               
-
-
-              <li> 
-               <%if user_signed_in? %>  
-                    
-                    <%=link_to destroy_user_session_path,   method: :delete,  data: { turbolinks: false }   do %>
-                    Cerrar Sesión <i class="glyph-icon icon-linecons-lock"></i>
-                    <%end%>
-               
-                <%end%> </li>
             </ul>
-          </li>
-        </ul>
-         
       </div>
-      <!--/.nav-collapse --> 
     </div>
-    <!-- /container --> 
-  </div>
-  <!-- /navbar-inner --> 
-</div>
-<!-- /navbar -->
-<div class="subnavbar">
-  <div class="subnavbar-inner">
-    <div class="container">
-      <ul class="mainnav">
-        <li class="<% if controller.controller_name == "welcome" %>active<%end%>">
-          <%=link_to root_path,  data: { turbolinks: false }   do %>
-          <i class="icon-dashboard"></i>
-          <span>Inicio</span> 
-          <%end%> 
+        <div class="main-panel">
+        <nav class="navbar navbar-default navbar-fixed" style="background-color: rgb(0, 0, 0);">
+            <div class="container-fluid">
+                 
+                <div class="collapse navbar-collapse">
+                    
 
-        </li> 
-        <li class="<% if controller.controller_name == "nutritional_controls" %>active<%end%>">
-          <%=link_to nutritional_controls_path,  data: { turbolinks: false }   do %>
-          <i class=" icon-list-alt"></i>
-          <span>Control Nutricional</span> 
-          <%end%>  
-        </li>
-        <li class="<% if controller.controller_name == "carnets" %>active<%end%>">
-          <%=link_to carnets_path,  data: { turbolinks: false }   do %>
-          <i class=" icon-list-alt"></i>
-          <span>Control de Vacunas</span> 
-          <%end%>  
-        </li>
-        <li class="<% if controller.controller_name == "arduino_devices" %>active<%end%>">
-          <%=link_to arduino_devices_path,  data: { turbolinks: false }   do %>
-          <i class="icon-hdd"></i>
-          <span>Mis arduinos</span> 
-          <%end%>  
-        </li>
-        <li class="<% if controller.controller_name == "cows" %>active<%end%>">
-          <%=link_to cows_path,  data: { turbolinks: false }   do %>
-          <i class="icon-user-md"></i>
-          <span>Bovinos</span> 
-          <%end%>  
-        </li>
-        <li class="<% if controller.controller_name == "veterinaries" %>active<%end%>">
-          <%=link_to veterinaries_path,  data: { turbolinks: false }   do %>
-          <i class="icon-user-md"></i>
-          <span>Veterinarios</span> 
-          <%end%>  
-        </li>
-        <li class="<% if controller.controller_name == "users" %>active<%end%>"> 
-         <%=link_to admin_users_path,  data: { turbolinks: false }   do %>
-            <i class="shortcut-icon icon-user"></i>
-            <span>Usuarios</span> 
-         <%end%> 
-        </li>
-        
-      </ul>
-    </div>
-    <!-- /container --> 
-  </div>
-  <!-- /subnavbar-inner --> 
-</div>
-<!-- /subnavbar -->
-<div class="main">
-  <div class="main-inner">
-    <div class="container">
-      <% if notice %>
-      <div class="alert alert-success alert-dismissable">
-        <i class="fa fa-check"></i>
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-        <b><%= notice %></b>
-      </div>
-      <% end %>
-      <% if alert %>
-      <div class="alert alert-danger alert-dismissable">
-        <i class="fa fa-ban"></i>
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-        <b><%= alert %></b>
-      </div>
-      <% end %>
-      
-     <%= yield %>
-    
-      <!-- /row --> 
-    </div>
-    <!-- /container --> 
-  </div>
-  <!-- /main-inner --> 
-</div>
-<!-- /main -->
-<div class="extra">
-  <div class="extra-inner">
-    <div class="container">
-      <div class="row">  
-                <div class="span9">
-                        <h4>
-                            Desarrollado por</h4>
-                        <ul>
-
-                            <li><a href="javascript:;">Ricardo Medina</a></li>
-                            <li><a href="javascript:;">Ricardo Sansores</a></li>
-                            <li><a href="javascript:;">Javier Aguilar</a></li> 
-                            <li><a href="javascript:;">Sherly Basto</a></li>
-                        </ul>
-                    </div>
-                    <div class="span3">
-                        <h4>
-                            Control de Bovinos</h4>
-                        <ul>
-                             
-                        </ul>
-                    </div>
-                    <!-- /span3 -->
-                  
-                    <!-- /span3 -->
+                    <ul class="nav navbar-nav navbar-right">
+                        
                    
-                    <!-- /span3 -->
+                        <li>
+                                <%if user_signed_in? %>  
+                    
+                                                  <%=link_to destroy_user_session_path,   method: :delete,  data: { turbolinks: false }   do %>
+                                                  Cerrar Sesión <i class="glyph-icon icon-linecons-lock"></i>
+                                                  <%end%>
+                                             
+                              <%end%>
+                        </li>
+            <li class="separator hidden-lg"></li>
+                    </ul>
                 </div>
-      <!-- /row --> 
+            </div>
+        </nav>
+
+
+        <div class="content">
+            <div class="container-fluid">
+                          <% if notice %>
+                  <div class="alert alert-success alert-dismissable">
+                    <i class="fa fa-check"></i>
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <b><%= notice %></b>
+                  </div>
+                  <% end %>
+                  <% if alert %>
+                  <div class="alert alert-danger alert-dismissable">
+                    <i class="fa fa-ban"></i>
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <b><%= alert %></b>
+                  </div>
+                  <% end %>
+                  
+                 <%= yield %>
+               
+
+
+
+                
+            </div>
+        </div>
+
+
+        <footer class="footer">
+            <div class="container-fluid">
+                <nav class="pull-left">
+                     
+                </nav>
+                <p class="copyright pull-right">
+                    &copy; <script>document.write(new Date().getFullYear())</script> <a href="http://www.creative-tim.com">Control de Bovinos</a>, made with love 
+                </p>
+            </div>
+        </footer>
+
     </div>
-    <!-- /container --> 
-  </div>
-  <!-- /extra-inner --> 
-</div>
-<!-- /extra -->
-<div class="footer">
-  <div class="footer-inner">
-    <div class="container">
-      <div class="row">
-        <div class="span12"> &copy; 2018 <a href="#"> </a></div>
-        <!-- /span12 --> 
-      </div>
-      <!-- /row --> 
-    </div>
-    <!-- /container --> 
-  </div>
-  <!-- /footer-inner --> 
-</div>
+
+
+
+
+</div>  
+ 
     
-        
+        <script type="text/javascript">
+      $(document).ready(function(){
+
+        <% if notice %>
+
+          $.notify({
+             icon: 'pe-7s-alert',
+            message: "<%= notice %>"
+
+           },{
+               type: 'info',
+               timer: 4000
+          });
+          <%end %>
+
+      });
+  </script>      
   </body>
 </html>

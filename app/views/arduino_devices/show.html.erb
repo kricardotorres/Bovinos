@@ -1,14 +1,14 @@
-<div class="row">  
-
-  <div id="target-1" class="span12">
-
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+  
+      <div class="header">
+        <h4 class="title"><i class="pe-7s-signal"></i> Detalles</h4>
+        <p class="category"><%= notice %></p>
+      </div>
  
 
-
-      <h1>Detalles</h1>
-
-
-      <p id="notice"><%= notice %></p>
+      <div class="content  ">
       <button onclick="delayPrint()">Imprimir Reporte</button>
       <%= search_form_for @q, url: arduino_device_search_path(@arduino_device),
       html: { method: :post } do |f| %>
@@ -26,9 +26,20 @@
       <%= f.submit t('search') , :class => "btn btn-success" %>
 
       <% end %>
-      <div id='section-to-print'>
-        <div class="row"> 
-            <h1>Datos del Bovino</h1>
+    </div> <!-- /widget -->
+     </div> 
+    </div> <!-- /span12 --> 
+ </div> 
+ <div class="row" id='section-to-print'>
+  <div class="col-md-12">
+    <div class="card" >
+  
+      <div class="header">
+        <h4 class="title"><i class="pe-7s-signal"></i> Datos del Bovino</h4>
+       
+      </div> 
+        <div class="content"> 
+             
             <p>
                <strong>Fecha:</strong>
              <%= @current_date %></p>
@@ -51,18 +62,10 @@
           <p>
             <strong>ID de Bovino:</strong>
             <%= @arduino_device.cow.id %>
-          </p>  
-            <div class="span12"> 
-              <div id="msn">Cargando...
-                  <div id="big_stats" class="cf">
+          </p>   
 
 
-                  </div>
-                  <!-- .stat --> 
-                </div>
-
-
-           </div>
+ 
            
  
       
@@ -75,19 +78,18 @@
 
  
             </div>
+        </div>  
+    <div id="msn">Cargando...
+                 
+    </div>
+   </div>       
 
-          
-
-        </div> <!-- /widget -->
-
-      </div> <!-- /span12 --> 
- 
+        
 
 <script>
   function delayPrint() { 
     window.print(); 
-  }
-  $(document).on('turbolinks:load', function(event) {
+  } 
 
     setInterval(function(){ 
      $.ajax({url: "/arduino_devices/<%=@arduino_device.id%>/get_last_moves?current_date=<%=@current_date%>", success: function(result){
@@ -95,6 +97,5 @@
       $("#msn").html(result);
     }});
 
-   }, 3000);
-  });
+   }, 3000); 
 </script>

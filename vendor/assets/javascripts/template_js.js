@@ -9,12 +9,12 @@
 //
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
-//  
-//= require jquery-1.7.2.min
-//= require excanvas.min 
-//= require chart.min 
-//= require bootstrap 
-//= require full-calendar/fullcalendar.min
-//= require base
+//   
+//= require jquery.3.2.1.min
+//= require bootstrap.min 
+//= require chartist.min
+//= require bootstrap-notify 
+//= require light-bootstrap-dashboard
+//= require demo 
 
  

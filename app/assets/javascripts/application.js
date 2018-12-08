@@ -11,9 +11,8 @@
 // about supported directives.
 //    
 
-//= require template_js
 //= require rails-ujs 
+//= require template_js
 //= require Chart.bundle
-//= require chartkick
-//= require turbolinks 
+//= require chartkick 
 //= require_tree .

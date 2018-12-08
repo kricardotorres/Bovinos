@@ -1,100 +1,73 @@
   <div class="row">
-    <div class="span12">
-            
-            <div id="target-1" class="widget">
-              
-              <div class="widget-content">
-                
-                <h1>Bienvenido</h1>
-                
-                <p>Control de Bovinos le ayuda a mantener un monitoreo sobre sus bovinos a través de su dispositivo ControlBovino, tenga en cuenta que debe tener conectado el dispositivo, no olvide crear una cuenta para que el veterinario pueda acceder al reporte del estado de su bovino.</p> 
-                
-              </div> <!-- /widget-content -->
-              
-            </div> <!-- /widget -->
-            
-          </div>
-        <div class="span6">
-          <div class="widget">
-            <div class="widget-header"> <i class="icon-bookmark"></i>
-              <h3>Secciones</h3>
-            </div>
-            <!-- /widget-header -->
-            <div class="widget-content">
-              <div class="shortcuts"> 
-                
+                    <div class="col-md-12">
+                        <div class="card">
 
-                <%=link_to nutritional_controls_path,  data: { turbolinks: false }, class:'shortcut'   do %>
-                <i class="shortcut-icon  icon-list-alt"></i>
-                <span class="shortcut-label">Control Nutricional</span> 
-                <%end%>   
-                 <%=link_to arduino_devices_path,  data: { turbolinks: false }, class:'shortcut'   do %>
-                <i class="shortcut-icon icon-hdd"></i>
-                <span class="shortcut-label">Mis arduinos</span> 
-                <%end%>  
-                 <%=link_to cows_path,  data: { turbolinks: false }, class:'shortcut'   do %>
-                <i class="shortcut-icon icon-user-md"></i>
-                <span class="shortcut-label">Bovinos</span> 
-                <%end%>  
-                 <%=link_to veterinaries_path,  data: { turbolinks: false }, class:'shortcut'   do %>
-                <i class="shortcut-icon icon-user-md"></i>
-                <span class="shortcut-label">Veterinarios</span> 
-                <%end%>  
-                <%=link_to admin_users_path,  data: { turbolinks: false }, class:'shortcut'  do %>
-                  <i class="shortcut-icon icon-user"></i>
-                  <span class="shortcut-label">Usuarios</span> 
-               <%end %> 
-               </div>
-              <!-- /shortcuts --> 
-            </div>
-            <!-- /widget-content --> 
-          </div>
+                            <div class="header">
+                                <h4 class="title"><i class="pe-7s-home"></i> Control de Bovinos</h4>
+                                <p class="category"><%= notice %></p>
+                            </div>
+                            <div class="content">
+                              <p>  Control de Bovinos le ayuda a mantener un monitoreo sobre sus bovinos a través de su dispositivo ControlBovino, tenga en cuenta que debe tener conectado el dispositivo, no olvide crear una cuenta para que el veterinario pueda acceder al reporte del estado de su bovino.</p> 
+                                
+                            </div>
+                        </div>
+                    </div>
+                                        <div class="col-md-12">
+                        <div class="card ">
+                            <div class="header">
+                                <h4 class="title">Dieta de la semana</h4>
+                                <p class="category"> </p>
+                            </div>
+                            <div class="content">
+                                <div class="table-full-width">
+                                    <table class="table">
+                                        <tbody>
+                                          <% if NutritionalControl.all.each do |nutritionalcontrol| %>
+                               
+                                            <tr>
+                                                <td>
+                                                   
+                                                   De <%=nutritionalcontrol.from_date.to_date%> a <%=nutritionalcontrol.to_date.to_date%>
+                                                   
+                                                </td>
+                                                <td>
+                                                  <%=nutritionalcontrol.name%>
+                                                </td>
+                                                <td>   
+                                                 <ul class="nav navbar-nav navbar-right">
+                                                      <% nutritionalcontrol.aliments.each do |aliment| %>
+                                                           
+                                                         <li style="float: left;"> <a href="#"><%= aliment.name %></a> </li> 
+                                                      <% end %>
+                                                </ul>
+                                              </td>
+                                                <td class="td-actions text-right">
+                                                     
+                                                </td>
+                                            </tr>
+                                       <% end.empty? %>
+                                          <h3>No hay resultados</h3>
+                                       <% end %>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div class="footer">
+                                    <hr>
+                                    <div class="stats">
+                                        <i class="fa fa-history"></i> Puede variar
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                        
+</div>
+  
+
  
-          <!-- /widget -->
-        </div>
-        <!-- /span6 -->
-        <div class="span6">
-          
-   
-          
-          <!-- /widget --> 
-          <div class="widget widget-nopad">
-            <div class="widget-header"> <i class="icon-list-alt"></i>
-              <h3>Dieta de la semana</h3>
-            </div>
-            <!-- /widget-header -->
-            <div class="widget-content">
-              <ul class="news-items">
-                <% if NutritionalControl.all.each do |nutritionalcontrol| %>
-                <li>
-                  
-                  <div class="news-item-date"> <span class="news-item-day"><%=nutritionalcontrol.from_date.strftime("%d")%></span> <span class="news-item-month"><%=nutritionalcontrol.from_date.strftime("%B")%></span> </div>
-                  <div class="news-item-date"> a </div>
-                  <div class="news-item-date"> <span class="news-item-day"><%=nutritionalcontrol.to_date.strftime("%d")%></span> <span class="news-item-month"><%=nutritionalcontrol.to_date.strftime("%B")%></span> </div>
-                  <div class="news-item-detail"> <a href="http://www.egrappler.com/thursday-roundup-40/" class="news-item-title" target="_blank"><%=nutritionalcontrol.name%></a>
-                    <h6>Alimentos:</h6>
-                    <p class="news-item-preview"> 
-                      <ul  >
-                      <% nutritionalcontrol.aliments.each do |aliment| %>
-                           
-                         <li style="float: left;"><%= aliment.name %></li> 
-                      <% end %>
-                      </ul>
-                    </p>
-                  </div>
-                  
-                </li>
-               <% end.empty? %>
-                  <h3>No hay resultados</h3>
-               <% end %>
-              </ul>
-            </div>
-            <!-- /widget-content --> 
-          </div>
-          <!-- /widget -->
-        </div>
-        <!-- /span6 --> 
-      </div>
-      
+  
+  
 
       
